@@ -76,17 +76,10 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
          * EntityNotFoundException("La commande fournisseur avec cette ID n'est pas trouvée dans la BDD"
          * );
          * }
-         */ // c faut on cherche si le fournisseur (champ de commande fournisseur) existe
-            // dans la BDD ou pas !!!
+         */
 
-        Optional<Fournisseur> fournisseur = fournisseurDao.findById(commandeFournisseurDto.getFournisseur().getId()); // id
-                                                                                                                      // de
-                                                                                                                      // fournisseur
-                                                                                                                      // et
-                                                                                                                      // pas
-                                                                                                                      // de
-                                                                                                                      // commande
-        // fournisseur
+        Optional<Fournisseur> fournisseur = fournisseurDao.findById(commandeFournisseurDto.getFournisseur().getId()); 
+
         if (fournisseur.isEmpty()) {
             log.error("Fournisseur with ID {} " + commandeFournisseurDto.getFournisseur().getId()
                     + " was bot found in DB");
@@ -95,19 +88,15 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         }
 
         List<String> articleErrors = new ArrayList<>();
-        if (commandeFournisseurDto.getLigneCommandeFournisseurs() != null) { // because it can be null no problem
-            commandeFournisseurDto.getLigneCommandeFournisseurs().forEach(lcf -> { // we want to find article in DB so
-                                                                                   // we use articleDao
-                if (lcf.getArticle() != null) { // verification du champ article vide ou pas, c pas vérification dans la
-                                                // BDD
-                    Optional<Article> article = articleDao.findById(lcf.getArticle().getId()); // id de article et pas
-                                                                                               // de
-                                                                                               // lignecommandefournisseur
+        if (commandeFournisseurDto.getLigneCommandeFournisseurs() != null) { 
+            commandeFournisseurDto.getLigneCommandeFournisseurs().forEach(lcf -> {
+                if (lcf.getArticle() != null) { 
+                    Optional<Article> article = articleDao.findById(lcf.getArticle().getId()); 
                     if (article.isEmpty()) {
                         articleErrors.add("L'article avec l'ID " + lcf.getArticle().getId() + "n'existe pas");
                     }
                 } else {
-                    articleErrors.add("Impossible d'enregistrer une commande avec un article null"); // affirme ligne63
+                    articleErrors.add("Impossible d'enregistrer une commande avec un article null");
                 }
             });
         }
@@ -120,7 +109,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         CommandeFournisseur savedCommandeFournisseur = commandeFournisseurDao
                 .save(CommandeFournisseurDto.toEntity(commandeFournisseurDto));
 
-        if (commandeFournisseurDto.getLigneCommandeFournisseurs() != null) { // cmd fourn contient des lignes
+        if (commandeFournisseurDto.getLigneCommandeFournisseurs() != null) {
             commandeFournisseurDto.getLigneCommandeFournisseurs().forEach(lcf -> {
                 LigneCommandeFournisseur ligneCommandeFournisseur = LigneCommandeFournisseurDto.toEntity(lcf);
                 ligneCommandeFournisseur.setCommandeFournisseur(savedCommandeFournisseur);
@@ -137,10 +126,9 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
     public CommandeFournisseurDto findById(Integer id) {
         if (id == null) {
             log.error("L'Id de la commande fournisseur est null");
-            return null; // ya pas de throw excep ici parceque on parle pas de entité invalide ou not
-                         // found mais de id dès le départ
+            return null; 
         }
-        return commandeFournisseurDao.findById(id).map(CommandeFournisseurDto::fromEntity). // v13 min53
+        return commandeFournisseurDao.findById(id).map(CommandeFournisseurDto::fromEntity). 
                 orElseThrow(() -> new EntityNotFoundException(
                         "La commande fournisseur avec ID " + id + " n'est pas trouvé dans la BDD",
                         ErrorCodes.COMMANDE_FOURNISSEUR_NOT_FOUND));
@@ -150,10 +138,9 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
     public CommandeFournisseurDto findByCode(String code) {
         if (!StringUtils.hasLength(code)) {
             log.error("Le code de la commande fourniseeur est null");
-            return null; // ya pas de throw excep ici parceque on parle pas de entité invalide ou not
-                         // found mais de id dès le départ
+            return null; 
         }
-        return commandeFournisseurDao.findByCode(code).map(CommandeFournisseurDto::fromEntity). // v13 min53
+        return commandeFournisseurDao.findByCode(code).map(CommandeFournisseurDto::fromEntity). 
                 orElseThrow(() -> new EntityNotFoundException(
                         "La commande fournisseur avec code " + code + " n'est pas trouvé dans la BDD",
                         ErrorCodes.COMMANDE_FOURNISSEUR_NOT_FOUND));
@@ -179,7 +166,6 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
             log.error(("Commande fournisseur ID is NULL"));
             return;
         }
-        // commandeFournisseurDao.deleteById(id); // deleteById() and not delete()
         List<LigneCommandeFournisseur> ligneCommandeFournisseurs = ligneCommandeFournisseurDao
                 .findAllByCommandeFournisseurId(id);
         if (!ligneCommandeFournisseurs.isEmpty()) {
