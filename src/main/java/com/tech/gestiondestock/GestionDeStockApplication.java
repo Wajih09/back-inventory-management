@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableJpaAuditing
 @SpringBootApplication
-//@ComponentScan(basePackages = "com.tech.gestiondestock.config") chatgbt to resolve nullpointer caused by springfox but it was solved by replacing springfox with openapi
 public class GestionDeStockApplication {
 
 	public static void main(String[] args) {
