@@ -8,9 +8,6 @@ import java.math.BigDecimal;
 
 @Data
 @Builder
-// v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on
-// veut l'exposer à une APi externe (angular ou autres)
-
 public class LigneVenteDto {
 
     private Integer id;
@@ -23,7 +20,7 @@ public class LigneVenteDto {
 
     private BigDecimal prixUnitaire;
 
-    private Integer idEntreprise; // v13 min58
+    private Integer idEntreprise;
 
     public static LigneVenteDto fromEntity(LigneVente ligneVente) {
         if (ligneVente == null) {
