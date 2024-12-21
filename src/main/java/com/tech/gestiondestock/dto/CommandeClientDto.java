@@ -19,7 +19,7 @@ import java.util.List;
 @Builder
 public class CommandeClientDto {
 
-    private Integer id; // v7 necessaire pour la modification des entitées sauf AdresseDto pas de modif
+    private Integer id;
 
     private String code;
 
@@ -27,24 +27,22 @@ public class CommandeClientDto {
 
     private EtatCommande etatCommande;
 
-    private ClientDto client;//v13 min10 ici dto par analogie au client dans commandeClient
+    private ClientDto client;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
-    //@JsonIgnore
-    private List<LigneCommandeClientDto> lignesCommandeClients; //v13 min11
+    private List<LigneCommandeClientDto> lignesCommandeClients;
 
     public static CommandeClientDto fromEntity(CommandeClient commandeClient){
 
         if(commandeClient == null) {
-            //TODO Exception
             return null;
         }
         return CommandeClientDto.builder()
                 .id(commandeClient.getId())
                 .code(commandeClient.getCode())
                 .dateCommande(commandeClient.getDateCommande())
-                .client(ClientDto.fromEntity(commandeClient.getClient())) //v13
+                .client(ClientDto.fromEntity(commandeClient.getClient()))
                 .idEntreprise(commandeClient.getIdEntreprise())
                 .build();
     }
@@ -53,10 +51,9 @@ public class CommandeClientDto {
 
         if(commandeClientDto == null){
             return null;
-            //TODO Exception
 
         }
-        CommandeClient commandeClient = new CommandeClient(); //v8
+        CommandeClient commandeClient = new CommandeClient();
         commandeClient.setId(commandeClientDto.getId());
         commandeClient.setCode(commandeClientDto.getCode());
         commandeClient.setClient(ClientDto.toEntity(commandeClientDto.getClient()));
