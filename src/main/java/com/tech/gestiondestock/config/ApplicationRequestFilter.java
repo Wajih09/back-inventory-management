@@ -22,8 +22,7 @@ import com.tech.gestiondestock.utils.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
 
-@Component //@Service or @Repositery both extends @Component https://www.youtube.com/watch?v=BVdQ3iuovg0 min40
-//@RequiredArgsConstructor //create constructor when any final field is introduced in the class
+@Component
 public class ApplicationRequestFilter extends OncePerRequestFilter {
 
   @Autowired
