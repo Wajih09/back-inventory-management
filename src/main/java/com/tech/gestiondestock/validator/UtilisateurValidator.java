@@ -25,26 +25,26 @@ public class UtilisateurValidator {
         if(!StringUtils.hasLength(utilisateurDto.getPrenom())){
             errors.add("Veuillez renseigner la prénom de l'utilisateur");
         }
-        if(utilisateurDto.getDateDeNaissance()==null) { // pas de StringUtils car ce champ n'est pas un String
+        if(utilisateurDto.getDateDeNaissance()==null) {
             errors.add("Veuillez renseigner la date de naissance de l'utilisateur");
         }
         if(!StringUtils.hasLength(utilisateurDto.getMotDePasse())){
             errors.add("Veuillez renseigner la mot de passe de l'utilisateur");
         }
-        if(utilisateurDto.getAdresse()==null) { // pas de StringUtils car ce champ n'est pas un String
+        if(utilisateurDto.getAdresse()==null) { 
             errors.add("Veuillez renseigner l'adresse de l'utilisateur");
         }
         else {
-            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getAdresse1())){ //v10 min4 adresse imbriquée
+            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getAdresse1())){
                 errors.add("Le champs 'Adresse1' est obligatoire ");
             }
-            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getVille())){ //v10 min4 adresse imbriquée
+            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getVille())){ 
                 errors.add("Le champs 'Ville' est obligatoire ");
             }
-            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getCodePostale())){ //v10 min4 adresse imbriquée
+            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getCodePostale())){
                 errors.add("Le champs 'CodePostale' est obligatoire ");
             }
-            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getPays())){ //v10 min4 adresse imbriquée
+            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getPays())){ 
                 errors.add("Le champs 'Pays' est obligatoire ");
             }
         }
