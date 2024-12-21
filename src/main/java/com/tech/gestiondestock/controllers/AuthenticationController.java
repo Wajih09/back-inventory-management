@@ -20,7 +20,7 @@ import com.tech.gestiondestock.utils.JwtUtil;
 import static com.tech.gestiondestock.utils.Constants.AUTHENTICATION_ENDPOINT;
 
 @RestController
-@RequestMapping(AUTHENTICATION_ENDPOINT) // declaré içi car on a pas créer une interface
+@RequestMapping(AUTHENTICATION_ENDPOINT)
 public class AuthenticationController {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class AuthenticationController {
 		
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getLogin());
 		final String jwt = jwtUtil.generateToken((ExtendedUser) userDetails);
-		return ResponseEntity.ok(AuthenticationResponse.builder().accessToken(jwt/*"dummy_access_token"*/).build());
+		return ResponseEntity.ok(AuthenticationResponse.builder().accessToken(jwt).build());
 	}
 
 }
