@@ -4,12 +4,9 @@ import com.tech.gestiondestock.controllers.api.CommandeClientApi;
 import com.tech.gestiondestock.dto.CommandeClientDto;
 import com.tech.gestiondestock.dto.LigneCommandeClientDto;
 import com.tech.gestiondestock.models.EtatCommande;
-//import com.tech.gestiondestock.dto.LigneCommandeClientDto;
-//import com.tech.gestiondestock.models.EtatCommande;
 import com.tech.gestiondestock.services.CommandeClientService;
 
 import java.math.BigDecimal;
-//import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -81,6 +78,3 @@ public class CommandeClientController implements CommandeClientApi {
 	    return ResponseEntity.ok().build();
 	  }
 }
-/*Footer
-        © 2023 GitHub, Inc.
-*/
