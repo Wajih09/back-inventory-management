@@ -18,13 +18,13 @@ import java.util.List;
 
 public class ClientDto {
 
-    private Integer id; // v7 necessaire pour la modification des entitées sauf AdresseDto pas de modif
+    private Integer id;
 
     private String nom;
 
     private String prenom;
 
-    private AdresseDto adresse; //v5 puisque c composé de 3 sous-adresse et va se répété dans plusieurs entitées donc on va créer une classe adresse
+    private AdresseDto adresse;
 
     private String numTel;
 
@@ -32,15 +32,14 @@ public class ClientDto {
 
     private String photo;
 
-    @JsonIgnore //v7 min5 because we don't want to expose this field to external APIs / when exposing a list it will generate an infinite loop min 5:50 v7
+    @JsonIgnore
     private List<CommandeClientDto> commandeClients;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
     public static ClientDto fromEntity(Client client){
 
         if(client == null) {
-            //TODO Exception
             return null;
         }
         return ClientDto.builder()
@@ -59,10 +58,8 @@ public class ClientDto {
 
         if(clientDto == null){
             return null;
-            //TODO Exception
-
         }
-        Client client = new Client(); //v8
+        Client client = new Client();
         client.setId(clientDto.getId());
         client.setNom(clientDto.getNom());
         client.setPrenom(clientDto.getPrenom());
