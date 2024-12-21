@@ -1,0 +1,38 @@
+spring:
+  pathmatch:
+    matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:mysql://localhost:3307/gestiondestock?createDatabaseIfNotExist=true&userSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+## Specify DBMS
+  jpa:
+    database: MYSQL
+    showSQL: false #lorsque une requete envoyee vers mon api : est ce que je veux afficher les requetes sql generees par hibernate ou nn (v2)
+## Hibernate DDL Auto (create, create-drop {cad lorsque j'arrete l'application on supprime la DB}, update)
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        ejb:
+          interceptor: com.tech.gestiondestock.interceptor.interceptor
+    
+      hibernates:
+        dialect: org.hibernate.dialect.MySQL5Dialect #helps hibernate to better queries https://www.youtube.com/watch?v=BVdQ3iuovg0
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.web: DEBUG
+    com.tech.gestiondestock: DEBUG
+
+server:
+  port : 8100
+
+flickr:
+  apiKey: 4bc8048e83637ee24beb316b5e73716b
+  apiSecret: 1806afce97a468c5
+  appKey: 72157720933135604-7d6454018cfa4b7e
+  appSecret: ccdcc95965929055
