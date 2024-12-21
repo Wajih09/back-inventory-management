@@ -14,10 +14,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.Collections;
 import java.util.Date;
 
-@RestControllerAdvice //v11 difference avec ControllerAdvice est qu'on a pas besoin d'ajouter @ResponseBody à chaque methode
-public class RestExceptionHandler extends ResponseEntityExceptionHandler { //v11 min42 cad on va utiliser le modele ResponseEntity pour la gestion des excep
+@RestControllerAdvice
+public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(EntityNotFoundException.class)//v11 min44 lorsque on leve une excep de type EntityNotFound dans notre application, elle sera catché par le RestControllerAdvice (de l14) et on va aller dans la methode de l18
+    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorDto> entityNotFoundException(EntityNotFoundException ex, WebRequest webRequest){
 
         final HttpStatus notFound = HttpStatus.NOT_FOUND;
