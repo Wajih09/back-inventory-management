@@ -16,21 +16,20 @@ import java.util.List;
 @Builder
 public class CategoryDto {
 
-    private Integer id; // v7 necessaire pour la modification des entitées sauf AdresseDto pas de modif
+    private Integer id;
 
     private String code;
 
     private String designation;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
-    @JsonIgnore //v7 min5 because we don't want to expose this field to external APIs / when exposing a list it will generate an infinite loop min 5:50 v7
+    @JsonIgnore
     private List<ArticleDto> articles;
 
-    public static CategoryDto fromEntity(Category category){ //v7 faire un mapping de Category -> CategoryDto
+    public static CategoryDto fromEntity(Category category){
 
         if(category == null) {
-            //TODO Exception
             return null;
         }
         return CategoryDto.builder()
@@ -45,10 +44,8 @@ public class CategoryDto {
 
         if(categoryDto == null){
             return null;
-            //TODO Exception
-
         }
-        Category category = new Category(); //v8
+        Category category = new Category();
         category.setId(categoryDto.getId());
         category.setCode(categoryDto.getCode());
         category.setDesignation(categoryDto.getDesignation());
