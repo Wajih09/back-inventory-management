@@ -10,7 +10,6 @@ import java.util.Optional;
 public interface UtilisateurDao extends JpaRepository<Utilisateur, Integer > {
 
     Optional<Utilisateur> findByNom(String nom);
-    // JPQL query
     @Query(value = "select u from Utilisateur u where u.email = :email")
     Optional<Utilisateur> findByEmail(@Param("email") String email);
 
