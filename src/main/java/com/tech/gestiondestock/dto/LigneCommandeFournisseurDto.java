@@ -16,26 +16,23 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-//v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
-
 public class LigneCommandeFournisseurDto {
 
     private Integer id;
 
     private Article article;
 
-    private CommandeFournisseur commandeFournisseur; //v6
+    private CommandeFournisseur commandeFournisseur;
 
     private BigDecimal quantite;
 
     private BigDecimal prixUnitaire;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
     public static LigneCommandeFournisseurDto fromEntity(LigneCommandeFournisseur ligneCommandeFournisseur){
 
         if(ligneCommandeFournisseur == null) {
-            //TODO Exception
             return null;
         }
         return LigneCommandeFournisseurDto.builder()
@@ -48,10 +45,9 @@ public class LigneCommandeFournisseurDto {
 
         if(ligneCommandeFournisseurDto == null){
             return null;
-            //TODO Exception
 
         }
-        LigneCommandeFournisseur LigneCommandeFournisseur = new LigneCommandeFournisseur(); //v8
+        LigneCommandeFournisseur LigneCommandeFournisseur = new LigneCommandeFournisseur();
         LigneCommandeFournisseur.setId(LigneCommandeFournisseur.getId());
         LigneCommandeFournisseur.setArticle(LigneCommandeFournisseur.getArticle());
         return LigneCommandeFournisseur;
