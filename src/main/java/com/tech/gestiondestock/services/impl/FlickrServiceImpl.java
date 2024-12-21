@@ -31,17 +31,16 @@ public class FlickrServiceImpl implements FlickrService {
     @Value("${flickr.appSecret}")
     private String appSecret;
 
-    @Autowired //si on commente le @Bean dans FlickrConfiguration alors erreur ici v15 min40
+    @Autowired
     private Flickr flickr;
 
-    //on peut faire injection par constructeur  v15 min41
     @Autowired
     public FlickrServiceImpl(Flickr flickr) {
         this.flickr = flickr;
     }
 
 
-    private void connect(){ //on aura pas besoin de la connexion car flick sera automatiquement injecté par le autowired qui est lié au Bean dans la flickrConfig la ou il ya cette connexion
+    private void connect(){ 
         Flickr flickr = new Flickr(apiKey, apiSecret, new REST());
         Auth auth = new Auth();
         auth.setPermission(Permission.READ);
