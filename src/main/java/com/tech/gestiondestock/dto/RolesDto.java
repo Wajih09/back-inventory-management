@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 @Builder
-//v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
 public class RolesDto {
 
     private Integer id;
@@ -18,7 +17,7 @@ public class RolesDto {
     @JsonIgnore
     private UtilisateurDto utilisateur;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
     public static RolesDto fromEntity(Roles roles) {
         if (roles == null) {
