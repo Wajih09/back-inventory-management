@@ -42,11 +42,6 @@
 			<optional>true</optional>
 		</dependency>
 
-
-		<!-- <dependency> <groupId>org.springdoc</groupId> <artifactId>springdoc-openapi-ui</artifactId> 
-			<version>1.7.0</version> </dependency> -->
-
-		<!-- https://www.youtube.com/watch?v=BVLhVCX7byY -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
@@ -67,7 +62,6 @@
 			<artifactId>swagger-annotations</artifactId>
 			<version>2.2.0</version>
 		</dependency>
-		<!-- until here -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -85,16 +79,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- <dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-api</artifactId>
-			<version>0.11.5</version>
-		</dependency> -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
