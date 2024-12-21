@@ -58,37 +58,29 @@ public class CommandeClientServiceImpl implements CommandeClientService {
     @Override
     public CommandeClientDto save(CommandeClientDto commandeClientDto) {
         List<String> errors = CommandeClientValidator.validate(commandeClientDto);
-        if(!errors.isEmpty()){ //v13 min53 verification 1er niveau
+        if(!errors.isEmpty()){ 
             log.error("Commande client is not valid");
             throw new InvalidEntityException("La commande client n'est pas valide", ErrorCodes.COMMANDE_CLIENT_NOT_VALID, errors);
         }
-        //verification metier v13 min45
-        Optional<Client> client = clientDao.findById(commandeClientDto.getClient().getId()); //ici le dto est deja validé cad c garanti que le champs client
-        //n'et pas null donc on passe à cette étape la ou on doit verifier si le client existe dans la BDD ou pas
-        //v13 min23 ici on veut chercher client dans la bdd donc on utilise clientDao et pas commandeClientDao
-                                                                            // et l'id sera extrait du client dans le dto
-        if(!client.isPresent()){ //Can be replaced with 'isEmpty()' equiv to oeElseThrow in ArticleServiceImpl1 means if it's not in the bdd
+
+        Optional<Client> client = clientDao.findById(commandeClientDto.getClient().getId()); 
+        if(!client.isPresent()){ 
             log.warn("Client with ID {} was not found in DB ", commandeClientDto.getClient().getId());
-            throw new EntityNotFoundException("Le client avec ID " + commandeClientDto.getClient().getId() + "n'est pas trouvé dans la BDD", ErrorCodes.CLIENT_NOT_FOUND); //3eme param toujours quand il ya verirification de la list des erreurs
+            throw new EntityNotFoundException("Le client avec ID " + commandeClientDto.getClient().getId() + "n'est pas trouvé dans la BDD", ErrorCodes.CLIENT_NOT_FOUND); 
         }
-        //on va vérifier les lignes de commandes de client malgré que json igonre mentionné dans le dto => vas dans la ligneCommandeClientDto => valider alors que article existe dans la bdd
+       
         List<String> articleErrors = new ArrayList<>();
-        if(commandeClientDto.getLignesCommandeClients() != null){ //v13 min28 ici on compare à null par if car à cet étape là on a déja valider la commandeClient
-            //cad (id, code, dateCreation, client) mais le champ ligne commande peut etre null, donc ici on veut dire que si on recoit ce champs
-            //dans la CommandeClientDto donc on doit vérifier si ça contienne un article dans la BD
+        if(commandeClientDto.getLignesCommandeClients() != null){
+        
             commandeClientDto.getLignesCommandeClients().forEach(el -> {
                if(el.getArticle() != null){
-                   Optional<Article> article = articleDao.findById(el.getArticle().getId()); // v13 m31 on cherche l'article dans la bd est pas la ligne de commande
-                   //donc articleDao et pas ligneCommandeClientDao
-
+                   Optional<Article> article = articleDao.findById(el.getArticle().getId()); 
                    if(article.isEmpty()){
-                       articleErrors.add("L'article avec l'ID " + el.getArticle().getId() + "n'esiste pas"); // ici on crée une liste dans la ligne 55
-                       //et puis on faire remplir par message si erreur existe, la cause de list car on boucle sur plusieur articles et pas un seul comme un seul
-                       //client dans la commandeClient auparavant.
+                       articleErrors.add("L'article avec l'ID " + el.getArticle().getId() + "n'esiste pas");
                    }
                }
                else {
-                   articleErrors.add("Impossible d'enregistrer une commande avec un article null"); //v13 min48
+                   articleErrors.add("Impossible d'enregistrer une commande avec un article null");
                }
             });
         }
@@ -97,28 +89,25 @@ public class CommandeClientServiceImpl implements CommandeClientService {
             throw new EntityNotFoundException("L'article n'existe pas dans la BD", ErrorCodes.ARTICLE_NOT_FOUND);
         }
 
-        //v13 min36 si tous va bien on enregistre la commande client dans la BD
         CommandeClient savedCommandeClient = commandeClientDao.save(CommandeClientDto.toEntity(commandeClientDto));
-        //CommandeClientDto.fromEntity(savedCommandeClient); // if it's error must extend Integer => you should reverse entity and Integer in JpaDao< ... >
 
-        if(commandeClientDto.getLignesCommandeClients() != null) { //v13 min43
-            //on affecte la commande client (un champ) aux lignes des commandes
+        if(commandeClientDto.getLignesCommandeClients() != null) {
             commandeClientDto.getLignesCommandeClients().forEach(lcc -> {
                 LigneCommandeClient ligneCommandeClient = LigneCommandeClientDto.toEntity(lcc);
-                ligneCommandeClient.setCommandeClient(savedCommandeClient); //ceci est le coeur de l'action : on affecte à l'entity le saved commande client
-                ligneCommandeClientDao.save(ligneCommandeClient); // ici on enregistre ces lignes de commandes eux memes dans la BDD
+                ligneCommandeClient.setCommandeClient(savedCommandeClient);
+                ligneCommandeClientDao.save(ligneCommandeClient);
             });
         }
-        return CommandeClientDto.fromEntity(savedCommandeClient); //recap v13 min44
+        return CommandeClientDto.fromEntity(savedCommandeClient);
     }
 
     @Override
     public CommandeClientDto findById(Integer id) {
         if(id == null){
             log.error("L'Id de la commande client est null");
-            return null; // ya pas de throw excep ici parceque on parle pas de entité invalide ou not found mais de id dès le départ
+            return null; 
         }
-        return commandeClientDao.findById(id).map(CommandeClientDto::fromEntity). //v13 min53
+        return commandeClientDao.findById(id).map(CommandeClientDto::fromEntity). 
                 orElseThrow(() -> new EntityNotFoundException("La commande client avec ID " + id +" n'est pas trouvé dans la BDD", ErrorCodes.COMMANDE_CLIENT_NOT_FOUND));
     }
 
@@ -126,9 +115,9 @@ public class CommandeClientServiceImpl implements CommandeClientService {
     public CommandeClientDto findByCode(String code) {
         if(!StringUtils.hasLength(code)){
             log.error("Le code de la commande client est null");
-            return null; // ya pas de throw excep ici parceque on parle pas de entité invalide ou not found mais de id dès le départ
+            return null; 
         }
-        return commandeClientDao.findByCode(code).map(CommandeClientDto::fromEntity). //v13 min53
+        return commandeClientDao.findByCode(code).map(CommandeClientDto::fromEntity). 
                 orElseThrow(() -> new EntityNotFoundException("La commande client avec code " + code +" n'est pas trouvé dans la BDD", ErrorCodes.COMMANDE_CLIENT_NOT_FOUND));
     }
 
@@ -143,7 +132,7 @@ public class CommandeClientServiceImpl implements CommandeClientService {
             log.error(("Delete ID is null"));
             return;
         }
-        commandeClientDao.deleteById(id); //deleteById() and not delete()
+        commandeClientDao.deleteById(id); 
     }
 
     @Override
