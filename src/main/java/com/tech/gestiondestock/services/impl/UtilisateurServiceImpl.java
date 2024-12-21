@@ -29,13 +29,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurDao utilisateurDao;
 	private final PasswordEncoder passwordEncoder;
-	//private final ApplicationUserDetailsService applicationUserDetailsService;
 
 	@Autowired
-	public UtilisateurServiceImpl(UtilisateurDao utilisateurDao, PasswordEncoder passwordEncoder/*, ApplicationUserDetailsService applicationUserDetailsService*/) {
+	public UtilisateurServiceImpl(UtilisateurDao utilisateurDao, PasswordEncoder passwordEncoder) {
 		this.utilisateurDao = utilisateurDao;
 		this.passwordEncoder = passwordEncoder;
-		//this.applicationUserDetailsService = applicationUserDetailsService;
+		
 	}
 
 	@Override
