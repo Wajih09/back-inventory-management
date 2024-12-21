@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder    //v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "entreprise")
 public class Entreprise extends AbstractEntity {
@@ -20,8 +20,8 @@ public class Entreprise extends AbstractEntity {
     @Column(name = "description")
     private String description;
 
-    @Embedded // v5 cad champ composé
-    private Adresse adresse; //v5 puisque c composé de 3 sous-adresse et va se répété dans plusieurs entitées donc on va créer une classe adresse
+    @Embedded
+    private Adresse adresse;
 
     @Column(name = "codefiscal")
     private String codeFiscal;
@@ -37,9 +37,6 @@ public class Entreprise extends AbstractEntity {
 
     @Column(name = "siteweb")
     private String siteWeb;
-
-//    @Column(name = "identreprise")
-//    private Integer idEntreprise;
 
     @OneToMany(mappedBy = "entreprise")
     private List<Utilisateur> utilisateurs;
