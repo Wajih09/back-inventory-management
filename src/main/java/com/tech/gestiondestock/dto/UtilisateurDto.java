@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Data
 @Builder
-//v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
 public class UtilisateurDto {
 
     private Integer id;
@@ -27,8 +26,8 @@ public class UtilisateurDto {
 
     private String motDePasse;
 
-    @Embedded // v5 cad champ composé
-    private AdresseDto adresse; //v5 puisque c composé de 3 sous-adresse et va se répété dans plusieurs entitées donc on va créer une classe adresse
+    @Embedded
+    private AdresseDto adresse;
 
     private String email;
 
@@ -37,8 +36,6 @@ public class UtilisateurDto {
     private EntrepriseDto entreprise;
 
     private List<RolesDto> roles;
-
-    //private Integer idEntreprise; //v13 min58
 
     public static UtilisateurDto fromEntity(Utilisateur utilisateur){
         if (utilisateur == null){
