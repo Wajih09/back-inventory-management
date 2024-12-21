@@ -22,9 +22,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import static com.tech.gestiondestock.utils.Constants.APP_ROOT;
 
-//@Tag(name = APP_ROOT + "/commandesclients")
 @Api("commandesclients")
-public interface CommandeClientApi {//v20
+public interface CommandeClientApi {
 
 
 
