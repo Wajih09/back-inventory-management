@@ -11,10 +11,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity //v8 remove it !!
-@Builder //v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
+@Entity
+@Builder
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "category")// v2 si on le met pas Hibernate prend le nom de la classe par defaut
+@Table(name = "category")
 public class Category extends AbstractEntity{
 
     @Column(name = "code")
