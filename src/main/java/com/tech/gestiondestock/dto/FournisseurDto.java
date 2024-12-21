@@ -14,11 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-//v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
-
 public class FournisseurDto {
 
-    private Integer id; // v7 necessaire pour la modification des entitées sauf AdresseDto pas de modif
+    private Integer id;
 
     private String nom;
 
@@ -32,7 +30,7 @@ public class FournisseurDto {
 
     private String photo;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
     @JsonIgnore
     private List<CommandeFournisseurDto> commandeFournisseurs;
