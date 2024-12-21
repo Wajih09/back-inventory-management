@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder //v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "fournisseur")
 public class Fournisseur extends AbstractEntity{
@@ -20,7 +20,7 @@ public class Fournisseur extends AbstractEntity{
     @Column(name = "prenom")
     private String prenom;
 
-    @Embedded //v5 champ composé mais c pas pour tous les classes comme id et dateCreation dans AbstractEntity
+    @Embedded
     private Adresse adresse;
 
     @Column(name = "numtel")
