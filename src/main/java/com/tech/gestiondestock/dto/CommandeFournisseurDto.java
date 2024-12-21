@@ -19,7 +19,7 @@ import java.util.List;
 @Builder
 public class CommandeFournisseurDto {
 
-    private Integer id; // v7 necessaire pour la modification des entitées sauf AdresseDto pas de modif
+    private Integer id;
 
     private String code;
 
@@ -29,15 +29,13 @@ public class CommandeFournisseurDto {
 
     private FournisseurDto fournisseur;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
-    //@JsonIgnore
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurs;
 
     public static CommandeFournisseurDto fromEntity(CommandeFournisseur commandeFournisseur){
 
         if(commandeFournisseur == null) {
-            //TODO Exception
             return null;
         }
         return CommandeFournisseurDto.builder()
@@ -54,10 +52,9 @@ public class CommandeFournisseurDto {
 
         if(commandeFournisseurDto == null){
             return null;
-            //TODO Exception
 
         }
-        CommandeFournisseur commandeFournisseur = new CommandeFournisseur(); //v8
+        CommandeFournisseur commandeFournisseur = new CommandeFournisseur();
         commandeFournisseur.setId(commandeFournisseurDto.getId());
         commandeFournisseur.setCode(commandeFournisseurDto.getCode());
         commandeFournisseur.setDateCommande(commandeFournisseurDto.getDateCommande());
