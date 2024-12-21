@@ -1,7 +1,6 @@
 package com.tech.gestiondestock.dto;
 
 import com.tech.gestiondestock.models.Article;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +14,7 @@ import java.math.BigDecimal;
 @Builder
 public class ArticleDto {
 
-    private Integer id; // v7 necessaire pour la modification des entitées sauf AdresseDto pas de modif
+    private Integer id;
 
     private String codeArticle;
 
@@ -29,14 +28,13 @@ public class ArticleDto {
 
     private String photo;
 
-    private CategoryDto category; //v6
+    private CategoryDto category;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
     public static ArticleDto fromEntity(Article article){
 
         if(article == null) {
-            //TODO Exception
             return null;
         }
         return ArticleDto.builder()
@@ -49,7 +47,7 @@ public class ArticleDto {
                 .tauxTVA(article.getTauxTVA())
                 .idEntreprise(article.getIdEntreprise())
                 .category(CategoryDto.fromEntity(article.getCategory()))
-                .idEntreprise(article.getIdEntreprise()) //v13 min58 TODO for other dto
+                .idEntreprise(article.getIdEntreprise())
                 .build();
     }
 
@@ -57,10 +55,8 @@ public class ArticleDto {
 
         if(articleDto == null){
             return null;
-            //TODO Exception
-
         }
-        Article article = new Article(); //v8
+        Article article = new Article();
         article.setId(articleDto.getId());
         article.setCodeArticle(articleDto.getCodeArticle());
         article.setDesignation(articleDto.getDesignation());
