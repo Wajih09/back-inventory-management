@@ -48,7 +48,6 @@ public enum ErrorCodes {
   VENTE_NOT_VALID(13001),
   VENTE_ALREADY_IN_USE(13002),
 
-  // Liste des exception techniaues
   UPDATE_PHOTO_EXCEPTION(14000),
   UNKNOWN_CONTEXT(14001)
   ;
