@@ -42,22 +42,22 @@ public class ClientServiceImpl implements ClientService {
     public ClientDto findById(Integer id) {
         if(id==null){
             log.error("L'Id du client est null");
-            return null; // ya pas de throw excep ici parceque on parle pas de entité invalide ou not found mais de id dès le départ
+            return null; 
         }
 
         Optional<Client> client = clientDao.findById(id);
-        return ClientDto.fromEntity(client.orElseThrow(() -> new EntityNotFoundException("Le client avec ID " + id +" n'est pas trouvé dans la BDD", ErrorCodes.CLIENT_NOT_FOUND))); //v7 min30 cad on va retourner l'articlr si nn une exception (tous dans la meme ligne)
+        return ClientDto.fromEntity(client.orElseThrow(() -> new EntityNotFoundException("Le client avec ID " + id +" n'est pas trouvé dans la BDD", ErrorCodes.CLIENT_NOT_FOUND)));
     }
 
     @Override
     public ClientDto findByNom(String nom) {
         if(!StringUtils.hasLength(nom)){
             log.error("Le nom du client est null");
-            return null; // ya pas de throw excep ici parceque on parle pas de entité invalide ou not found mais de id dès le départ
+            return null;
         }
 
         Optional<Client> client = clientDao.findByNom(nom);
-        return ClientDto.fromEntity(client.orElseThrow(() -> new EntityNotFoundException("Le client avec nom " + nom +" n'est pas trouvé dans la BDD", ErrorCodes.CLIENT_NOT_FOUND))); //v7 min30 cad on va retourner l'articlr si nn une exception (tous dans la meme ligne)
+        return ClientDto.fromEntity(client.orElseThrow(() -> new EntityNotFoundException("Le client avec nom " + nom +" n'est pas trouvé dans la BDD", ErrorCodes.CLIENT_NOT_FOUND)));
     }
 
     @Override
