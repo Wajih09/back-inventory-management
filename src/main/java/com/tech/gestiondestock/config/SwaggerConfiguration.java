@@ -1,6 +1,5 @@
 package com.tech.gestiondestock.config;
 
-//import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 /*import springfox.documentation.builders.ApiInfoBuilder; //videos
@@ -22,7 +21,7 @@ import javax.annotation.PostConstruct;
 import static com.tech.gestiondestock.utils.Constants.APP_ROOT;
 
 @Configuration
-@EnableSwagger2 //v16 min 22 on veut activer swagger
+@EnableSwagger2
 public class SwaggerConfiguration {
 
     public SwaggerConfiguration() {
@@ -33,8 +32,7 @@ public class SwaggerConfiguration {
     public void postConstruct() {
         System.out.println("SwaggerConfiguration postConstruct");
     }
-    //@Bean
-    public Docket api(){ //suivant video alibou et https://www.youtube.com/watch?v=BVLhVCX7byY
+    public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(
                         new ApiInfoBuilder()
@@ -44,15 +42,9 @@ public class SwaggerConfiguration {
                 )
                 .groupName("REST API V1")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.tech.gestiondestock"))//dire a swagger c quoi le package de base de notre application
-                .paths(PathSelectors.ant(APP_ROOT + "/**")) // cad /peut importe ou PathSelectors.any()
+                .apis(RequestHandlerSelectors.basePackage("com.tech.gestiondestock"))
+                .paths(PathSelectors.ant(APP_ROOT + "/**"))
                 .build();
 
     }
-//    public GroupedOpenApi api(){ //suivant migration vers openAPI
-//        return GroupedOpenApi.builder()
-//                .group("REST API V1")
-//                .pathsToMatch(APP_ROOT + "/**")
-//                .build();
-//    }
 }
