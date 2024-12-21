@@ -19,7 +19,6 @@ public interface CommandeFournisseurService {
 
     CommandeFournisseurDto updateArticle(Integer idCommande, Integer idLigneCommande, Integer idArticle);
 
-    // Delete article ==> delete LigneCommandeFournisseur
     CommandeFournisseurDto deleteArticle(Integer idCommande, Integer idLigneCommande);
 
     CommandeFournisseurDto findById(Integer id);
