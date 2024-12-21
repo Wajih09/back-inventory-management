@@ -10,8 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder // v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on
-         // veut l'exposer à une APi externe (angular ou autres)
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "commandefournisseur")
 public class CommandeFournisseur extends AbstractEntity {
