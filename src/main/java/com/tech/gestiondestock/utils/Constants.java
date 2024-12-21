@@ -1,6 +1,6 @@
 package com.tech.gestiondestock.utils;
 
-public interface Constants { // v12 min44
+public interface Constants {
 
     String APP_ROOT = "gestiondestock/v1";
     String COMMANDE_FOURNISSEUR_ENDPOINT = APP_ROOT + "/commandesfournisseurs";
