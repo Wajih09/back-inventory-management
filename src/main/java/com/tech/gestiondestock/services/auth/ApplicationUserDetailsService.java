@@ -21,7 +21,7 @@ import com.tech.gestiondestock.models.auth.ExtendedUser;
 import com.tech.gestiondestock.repository.UtilisateurDao;
 import com.tech.gestiondestock.services.UtilisateurService;
 
-@Service //2eme façon de créer des services => directement classe pas besoin de passer par l'interface
+@Service
 public class ApplicationUserDetailsService implements UserDetailsService{
 	
 	private UtilisateurService service;
@@ -34,15 +34,8 @@ public class ApplicationUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 		UtilisateurDto utilisateur = service.findByEmail(email);
-				
-//		.orElseThrow(()->
-//		new EntityNotFoundException("Aucun utilisateur avec l'email fournit", ErrorCodes.UTILISATEUR_NOT_FOUND)
-//		);
-		
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 	    utilisateur.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRoleNom())));
-		
-		//ce service créé doit retourner un objet de type user, donc içi on va retourner un map des données de utilisateurDto vers template User que Spring veut avoir adapté à son UserDetailsService
 		return new ExtendedUser(utilisateur.getEmail(), utilisateur.getMotDePasse(), /*Collections.emptyList()*/ utilisateur.getEntreprise().getId(), authorities); 
 	}
 }
