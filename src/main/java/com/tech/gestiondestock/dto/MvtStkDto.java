@@ -11,8 +11,6 @@ import java.time.Instant;
 
 @Data
 @Builder
-// v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on
-// veut l'exposer à une APi externe (angular ou autres)
 public class MvtStkDto {
 
     private Integer id;
@@ -27,7 +25,7 @@ public class MvtStkDto {
 
     private SourceMvtStk sourceMvt;
 
-    private Integer idEntreprise; // v13 min58
+    private Integer idEntreprise;
 
     public static MvtStkDto fromEntity(MvtStk mvtStk) {
         if (mvtStk == null) {
