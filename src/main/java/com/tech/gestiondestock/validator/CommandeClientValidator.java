@@ -16,7 +16,7 @@ public class CommandeClientValidator {
             errors.add("Veuillez sélectionner un client");
             return errors;
         }
-        if(!StringUtils.hasLength(commandeClientDto.getCode())){ //v9 not null nor length 0
+        if(!StringUtils.hasLength(commandeClientDto.getCode())){
             errors.add("Veuillez renseigner le code de la commande client");
         }
         if(commandeClientDto.getDateCommande()==null){
