@@ -8,7 +8,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder //v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "roles")
 public class Roles extends AbstractEntity {
