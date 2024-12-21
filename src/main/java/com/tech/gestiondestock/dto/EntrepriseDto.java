@@ -17,13 +17,13 @@ import java.util.List;
 
 public class EntrepriseDto {
 
-    private Integer id; // v7 necessaire pour la modification des entitées sauf AdresseDto pas de modif
+    private Integer id;
 
     private String nom;
 
     private String description;
 
-    private AdresseDto adresse; //v5 puisque c composé de 3 sous-adresse et va se répété dans plusieurs entitées donc on va créer une classe adresse
+    private AdresseDto adresse;
 
     private String codeFiscal;
 
@@ -35,15 +35,12 @@ public class EntrepriseDto {
 
     private String siteWeb;
 
-    //private Integer idEntreprise; //v13 min58
-
     @JsonIgnore
     List<UtilisateurDto> utilisateurs;
 
     public static EntrepriseDto fromEntity(Entreprise entreprise){
 
         if(entreprise == null) {
-            //TODO Exception
             return null;
         }
         return EntrepriseDto.builder()
@@ -63,7 +60,6 @@ public class EntrepriseDto {
 
         if(entrepriseDto == null){
             return null;
-            //TODO Exception
 
         }
         Entreprise entreprise = new Entreprise();
