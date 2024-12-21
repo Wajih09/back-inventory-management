@@ -16,7 +16,7 @@ import com.tech.gestiondestock.exception.InvalidEntityException;
 import com.tech.gestiondestock.services.CategoryService;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest // min7 preparer le context pour le test : injecter les beans necessaires
+@SpringBootTest
 public class CategoryServiceImplTest {
 
 	@Autowired
@@ -29,20 +29,11 @@ public class CategoryServiceImplTest {
 
 		CategoryDto savedCategory = categoryService.save(expectedCategory);
 
-//		assertNotNull(savedCategory);
-//		assertNotNull(savedCategory.getId());
-//		assertEquals(expectedCategory.getCode(), savedCategory.getCode());
-//		assertEquals(expectedCategory.getDesignation(), savedCategory.getDesignation());
-//		assertEquals(expectedCategory.getIdEntreprise(), savedCategory.getIdEntreprise());
-
 		assertNotNull(savedCategory, "Saved category should not be null");
 		assertNotNull(savedCategory.getId(), "Saved category ID should not be null");
 
 		assertAll("Saved category", () -> assertNotNull(savedCategory, "Saved category should not be null"),
 				() -> assertNotNull(savedCategory.getId(), "Saved category ID should not be null"),
-				// () -> assertEquals(expectedCategory.getId(), savedCategory.getId(), "Category
-				// ID should match"), Since the ID is automatically generated and you don't have
-				// control over its value beforehand
 				() -> assertEquals(expectedCategory.getIdEntreprise(), savedCategory.getIdEntreprise(),
 						"ID entreprise should match"),
 				() -> assertEquals(expectedCategory.getCode(), savedCategory.getCode(), "Category code should match"),
@@ -97,7 +88,6 @@ public class CategoryServiceImplTest {
 
 	  @Test
 	  public void shouldThrowEntityNotFoundException2() {
-	      // Assert that calling findById with id 0 throws EntityNotFoundException
 	      assertThrows(EntityNotFoundException.class, () -> {
 	          categoryService.findById(0);
 	      });
