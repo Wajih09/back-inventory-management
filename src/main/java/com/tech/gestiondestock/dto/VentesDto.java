@@ -10,7 +10,6 @@ import com.tech.gestiondestock.models.Ventes;
 
 @Data
 @Builder
-//v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
 public class VentesDto {
 
     private Integer id;
@@ -21,9 +20,9 @@ public class VentesDto {
 
     private String commentaire;
 
-    private Integer idEntreprise; //v13 min58
+    private Integer idEntreprise;
 
-    //@OneToMany(mappedBy = "ventes")
+    @OneToMany(mappedBy = "ventes")
     private List<LigneVenteDto> ligneVentes;
 
     public static VentesDto fromEntity(Ventes vente) {
