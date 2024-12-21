@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode(callSuper = true)
 @ToString(exclude = {"category", "ligneVentes", "ligneCommandeClients", "ligneCommandeFournisseurs"})
-@Table(name = "article") // v2 si on le met pas Hibernate prend le nom de la classe par defaut
+@Table(name = "article")
 public class Article extends AbstractEntity{
 
     @Column(name = "codearticle")
@@ -41,7 +41,7 @@ public class Article extends AbstractEntity{
     @JoinColumn(name = "idcategory")
     private Category category;
 
-    @OneToMany(mappedBy = "article") // v13 min57
+    @OneToMany(mappedBy = "article")
     private List<LigneVente> ligneVentes;
 
     @OneToMany(mappedBy = "article")
