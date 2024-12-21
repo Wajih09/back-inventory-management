@@ -19,7 +19,7 @@ public class ArticleValidator {
             errors.add("Veuillez sélectionner une catégorie");
             return errors;
         }
-        if(!StringUtils.hasLength(articleDto.getCodeArticle())){ //v9 not null nor length 0
+        if(!StringUtils.hasLength(articleDto.getCodeArticle())){
             errors.add("Veuillez renseigner le code de l'article");
         }
         if(!StringUtils.hasLength(articleDto.getDesignation())){
