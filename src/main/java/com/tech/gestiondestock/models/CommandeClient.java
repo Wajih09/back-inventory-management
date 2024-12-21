@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder //v6 pour faire une copy (dto) contient seulement des champs spécéfiques qu'on veut l'exposer à une APi externe (angular ou autres)
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "commandeclient")
 public class CommandeClient extends AbstractEntity {
@@ -32,6 +32,6 @@ public class CommandeClient extends AbstractEntity {
     @JoinColumn(name = "idclient")
     private Client client;
 
-    @OneToMany(mappedBy = "commandeClient") // c pas à la fin "s" comme dans l'entité client
+    @OneToMany(mappedBy = "commandeClient")
     private List<LigneCommandeClient> ligneCommandeClients;
 }
