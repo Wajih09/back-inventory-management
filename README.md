@@ -3,6 +3,9 @@ Credit to @alibou
 This is a versatile Inventory Management System designed for businesses to efficiently manage their stock, suppliers, customers, and orders. 
 The system enables users to create, update, and track various entities including articles, customers, suppliers, and both customer and supplier orders. The platform also features detailed analytics and statistics (inProgress) for monitoring inventory trends and order status, helping users make data-driven decisions. With an intuitive interface and full functionality across the supply chain, this application ensures efficient, organized inventory control.
 
+**Technos : Java 11 / Spring Security / Flick API / PosgreSQL**
+
+
 ![image_original](https://github.com/user-attachments/assets/9e873bed-4141-4457-8c26-108bac98bff3)
 
 
